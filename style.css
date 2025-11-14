@@ -1,0 +1,377 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header Styles */
+header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.logo h2 {
+    color: #3498db;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 2rem;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #3498db;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    color: white;
+    padding: 8rem 2rem 4rem;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.cta-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cta-btn:hover {
+    background-color: #c0392b;
+}
+
+/* How It Works Section */
+.how-it-works {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.how-it-works h2 {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    color: #2c3e50;
+}
+
+.steps {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.step {
+    flex: 1;
+    min-width: 200px;
+    margin: 1rem;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.step-number {
+    background-color: #3498db;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-weight: bold;
+}
+
+.step h3 {
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
+/* Investment Section */
+.investment {
+    padding: 4rem 2rem;
+    background-color: #ecf0f1;
+    text-align: center;
+}
+
+.investment h2 {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    color: #2c3e50;
+}
+
+.plan-card {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.plan-header {
+    background-color: #3498db;
+    color: white;
+    padding: 2rem;
+}
+
+.plan-header h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.price {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.plan-features {
+    padding: 2rem;
+}
+
+.plan-features ul {
+    list-style: none;
+    text-align: left;
+}
+
+.plan-features li {
+    padding: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.plan-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    width: 100%;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.plan-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Tasks Section */
+.tasks {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.tasks h2 {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    color: #2c3e50;
+}
+
+.task-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.task-card {
+    flex: 1;
+    min-width: 250px;
+    margin: 1rem;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.task-card h3 {
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
+.task-btn {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    margin-top: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.task-btn:hover {
+    background-color: #27ae60;
+}
+
+/* Dashboard Section */
+.dashboard {
+    padding: 4rem 2rem;
+    background-color: #ecf0f1;
+    text-align: center;
+}
+
+.dashboard h2 {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    color: #2c3e50;
+}
+
+.dashboard-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.dash-card {
+    background-color: white;
+    padding: 2rem;
+    margin: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    min-width: 200px;
+}
+
+.dash-card h3 {
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
+.dash-card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #3498db;
+}
+
+.withdraw-btn {
+    background-color: #9b59b6;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.withdraw-btn:hover {
+    background-color: #8e44ad;
+}
+
+/* Footer */
+footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.modal-content button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    margin-top: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .steps, .task-container, .dashboard-cards {
+        flex-direction: column;
+    }
+    
+    .step, .task-card, .dash-card {
+        margin: 1rem 0;
+    }
+}
