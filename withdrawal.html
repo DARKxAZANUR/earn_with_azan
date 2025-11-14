@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdrawal - ProfitEarn</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .withdrawal-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .withdrawal-header {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .withdrawal-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .withdrawal-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .balance-info {
+            background: #e74c3c;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            margin: 1rem 2rem;
+            border-radius: 10px;
+        }
+
+        .balance-info h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .balance-amount {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .withdrawal-options {
+            display: flex;
+            flex-wrap: wrap;
+            min-height: 500px;
+        }
+
+        /* UPI Section */
+        .upi-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 2rem;
+            border-right: 2px solid #ecf0f1;
+        }
+
+        .payment-method {
+            background: #3498db;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .withdrawal-form {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #bdc3c7;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        .amount-slider {
+            margin: 1rem 0;
+        }
+
+        .slider-value {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #e74c3c;
+            margin: 1rem 0;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: #bdc3c7;
+            outline: none;
+        }
+
+        .limits {
+            background: #fff3cd;
+            padding: 1rem;
+            border-radius: 5px;
+            border-left: 4px solid #f39c12;
+            margin: 1rem 0;
+        }
+
+        .limits p {
+            margin: 0.3rem 0;
+            color: #856404;
+        }
+
+        /* USDT Section */
+        .usdt-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 2rem;
+            background: #f8f9fa;
+        }
+
+        .usdt-method {
+            background: #e67e22;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .network-info {
+            background: #34495e;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .network-info h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .withdraw-btn {
+            background: #2ecc71;
+            color: white;
+            border: none;
+            padding: 1.2rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            width: 100%;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .withdraw-btn:hover {
+            background: #27ae60;
+        }
+
+        .withdraw-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding: 0 2rem 2rem;
+        }
+
+        .back-btn {
+            background: #95a5a6;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            text-align: center;
+            flex: 1;
+        }
+
+        .back-btn:hover {
+            background: #7f8c8d;
+        }
+
+        .instructions {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            border-left: 4px solid #3498db;
+        }
+
+        .instructions h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .instructions ol {
+            padding-left: 1.5rem;
+        }
+
+        .instructions li {
+            margin-bottom: 0.8rem;
+            color: #34495e;
+            line-height: 1.5;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .withdrawal-options {
+                flex-direction: column;
+            }
+            
+            .upi-section {
+                border-right: none;
+                border-bottom: 2px solid #ecf0f1;
+            }
+            
+            .withdrawal-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .conversion-rate {
+            background: #d4edda;
+            padding: 1rem;
+            border-radius: 5px;
+            border-left: 4px solid #28a745;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .conversion-rate p {
+            margin: 0;
+            color: #155724;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="withdrawal-container">
+        <div class="withdrawal-header">
+            <h1>Withdrawal Karein</h1>
+            <p>Apne paise nikalne ke liye koi bhi method select karein</p>
+        </div>
+
+        <div class="balance-info">
+            <h2>Available Balance</h2>
+            <div class="balance-amount" id="availableBalance">₹0</div>
+        </div>
+
+        <div class="withdrawal-options">
+            <!-- UPI Withdrawal Section -->
+            <div class="upi-section">
+                <div class="payment-method">
+                    <h2>🌐 UPI Withdrawal</h2>
+                    <p>Fast & Easy Indian Withdrawal</p>
+                </div>
+
+                <div class="withdrawal-form">
+                    <div class="form-group">
+                        <label for="upiId">Apna UPI ID</label>
+                        <input type="text" id="upiId" placeholder="example@paytm" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="amount">Withdrawal Amount (₹)</label>
+                        <div class="slider-value" id="amountValue">₹150</div>
+                        <input type="range" id="amount" min="150" max="15000" value="150" step="50" class="amount-slider">
+                    </div>
+
+                    <div class="limits">
+                        <p><strong>Withdrawal Limits:</strong></p>
+                        <p>Minimum: ₹150</p>
+                        <p>Maximum: ₹15,000</p>
+                        <p>Daily Limit: ₹15,000</p>
+                    </div>
+
+                    <button class="withdraw-btn" id="upiWithdrawBtn" onclick="processUPIWithdrawal()">
+                        Withdrawal Request Karein
+                    </button>
+                </div>
+
+                <div class="instructions">
+                    <h3>UPI Withdrawal Process:</h3>
+                    <ol>
+                        <li>Apna UPI ID enter karein</li>
+                        <li>Amount select karein (₹150 - ₹15,000)</li>
+                        <li>Withdrawal request submit karein</li>
+                        <li>24 hours ke andar paise aapke account mein aa jayenge</li>
+                        <li>Transaction complete hone par SMS milega</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- USDT Withdrawal Section -->
+            <div class="usdt-section">
+                <div class="payment-method">
+                    <h2>₿ USDT Withdrawal</h2>
+                    <p>International Crypto Withdrawal</p>
+                </div>
+
+                <div class="network-info">
+                    <h3>🌍 Network: TRC-20</h3>
+                    <p>Only TRC-20 network use karein</p>
+                </div>
+
+                <div class="withdrawal-form">
+                    <div class="form-group">
+                        <label for="usdtAddress">Apna USDT Wallet Address (TRC-20)</label>
+                        <input type="text" id="usdtAddress" placeholder="TYsg7R4fM62j8Xq1K9pL3nBvW2cD5zE6x" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="usdtAmount">Withdrawal Amount (USDT)</label>
+                        <div class="slider-value" id="usdtAmountValue">2 USDT</div>
+                        <input type="range" id="usdtAmount" min="2" max="180" value="2" step="1" class="amount-slider">
+                    </div>
+
+                    <div class="conversion-rate">
+                        <p>💱 Conversion Rate: 1 USDT = ₹83</p>
+                    </div>
+
+                    <div class="limits">
+                        <p><strong>Withdrawal Limits:</strong></p>
+                        <p>Minimum: 2 USDT (≈ ₹166)</p>
+                        <p>Maximum: 180 USDT (≈ ₹15,000)</p>
+                        <p>Network Fee: 1 USDT</p>
+                    </div>
+
+                    <button class="withdraw-btn" id="usdtWithdrawBtn" onclick="processUSDTWithdrawal()">
+                        USDT Withdrawal Request
+                    </button>
+                </div>
+
+                <div class="instructions">
+                    <h3>USDT Withdrawal Process:</h3>
+                    <ol>
+                        <li>Apna TRC-20 wallet address enter karein</li>
+                        <li>Amount select karein (2 - 180 USDT)</li>
+                        <li>Withdrawal request submit karein</li>
+                        <li>24-48 hours ke andar USDT aapke wallet mein aa jayega</li>
+                        <li>Network fee 1 USDT deduct hoga</li>
+                    </ol>
+                </div>
+
+                <div class="instructions" style="background: #fff3cd; border-left-color: #f39c12;">
+                    <h3>⚠️ Important Notes:</h3>
+                    <ul>
+                        <li>Only TRC-20 network use karein</li>
+                        <li>Wrong address par funds lose ho sakte hain</li>
+                        <li>Network fee 1 USDT charge hoga</li>
+                        <li>Transaction confirm hone mein time lag sakta hai</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="index.html" class="back-btn">← Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        // Load user balance
+        function loadUserBalance() {
+            const savedData = localStorage.getItem('profitEarnUserData');
+            if (savedData) {
+                const userData = JSON.parse(savedData);
+                document.getElementById('availableBalance').textContent = `₹${userData.totalBalance}`;
+                
+                // Disable buttons if balance is low
+                const upiBtn = document.getElementById('upiWithdrawBtn');
+                const usdtBtn = document.getElementById('usdtWithdrawBtn');
+                
+                if (userData.totalBalance < 150) {
+                    upiBtn.disabled = true;
+                    usdtBtn.disabled = true;
+                    upiBtn.textContent = 'Insufficient Balance (Min ₹150)';
+                    usdtBtn.textContent = 'Insufficient Balance (Min 2 USDT)';
+                }
+            }
+        }
+
+        // UPI Amount Slider
+        const amountSlider = document.getElementById('amount');
+        const amountValue = document.getElementById('amountValue');
+
+        amountSlider.addEventListener('input', function() {
+            amountValue.textContent = `₹${this.value}`;
+        });
+
+        // USDT Amount Slider
+        const usdtAmountSlider = document.getElementById('usdtAmount');
+        const usdtAmountValue = document.getElementById('usdtAmountValue');
+
+        usdtAmountSlider.addEventListener('input', function() {
+            usdtAmountValue.textContent = `${this.value} USDT`;
+        });
+
+        // UPI Withdrawal Process
+        function processUPIWithdrawal() {
+            const upiId = document.getElementById('upiId').value;
+            const amount = document.getElementById('amount').value;
+            
+            if (!upiId) {
+                alert('Please enter your UPI ID');
+                return;
+            }
+            
+            if (amount < 150) {
+                alert('Minimum withdrawal amount is ₹150');
+                return;
+            }
+            
+            if (confirm(`Confirm Withdrawal?\n\nUPI ID: ${upiId}\nAmount: ₹${amount}\n\nPaise 24 hours ke andar transfer ho jayenge.`)) {
+                alert(`Withdrawal request successful!\n\n₹${amount} aapke UPI ID ${upiId} par 24 hours mein transfer kar diye jayenge.\n\nTransaction ID: TXN${Date.now()}`);
+                
+                // Update balance
+                updateBalanceAfterWithdrawal(amount, 'INR');
+            }
+        }
+
+        // USDT Withdrawal Process
+        function processUSDTWithdrawal() {
+            const usdtAddress = document.getElementById('usdtAddress').value;
+            const amount = document.getElementById('usdtAmount').value;
+            
+            if (!usdtAddress) {
+                alert('Please enter your USDT wallet address');
+                return;
+            }
+            
+            if (amount < 2) {
+                alert('Minimum withdrawal amount is 2 USDT');
+                return;
+            }
+            
+            // Calculate INR equivalent
+            const inrAmount = amount * 83;
+            
+            if (confirm(`Confirm USDT Withdrawal?\n\nWallet: ${usdtAddress}\nAmount: ${amount} USDT (≈ ₹${inrAmount})\nNetwork Fee: 1 USDT\n\nTotal Deducted: ${parseInt(amount) + 1} USDT`)) {
+                alert(`USDT withdrawal request successful!\n\n${amount} USDT aapke wallet address par 24-48 hours mein transfer kar diye jayenge.\n\nTransaction ID: USDT${Date.now()}`);
+                
+                // Update balance (convert USDT to INR for deduction)
+                updateBalanceAfterWithdrawal(inrAmount, 'USDT');
+            }
+        }
+
+        // Update balance after withdrawal
+        function updateBalanceAfterWithdrawal(amount, currency) {
+            const savedData = localStorage.getItem('profitEarnUserData');
+            if (savedData) {
+                const userData = JSON.parse(savedData);
+                
+                if (currency === 'INR') {
+                    userData.totalBalance -= parseInt(amount);
+                } else {
+                    // For USDT, we already have INR equivalent
+                    userData.totalBalance -= parseInt(amount);
+                }
+                
+                localStorage.setItem('profitEarnUserData', JSON.stringify(userData));
+                loadUserBalance(); // Refresh balance display
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUserBalance();
+        });
+    </script>
+</body>
+</html>
