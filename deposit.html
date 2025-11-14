@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit - ProfitEarn</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .deposit-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .deposit-header {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .deposit-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .deposit-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .payment-options {
+            display: flex;
+            flex-wrap: wrap;
+            min-height: 500px;
+        }
+
+        /* UPI Section */
+        .upi-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 2rem;
+            border-right: 2px solid #ecf0f1;
+        }
+
+        .payment-method {
+            background: #3498db;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .qr-container {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .qr-code {
+            width: 250px;
+            height: 250px;
+            border: 3px solid #3498db;
+            border-radius: 10px;
+            margin: 0 auto;
+        }
+
+        .upi-details {
+            background: #ecf0f1;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
+        .upi-details h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .upi-id {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #e74c3c;
+            background: white;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            border: 2px dashed #3498db;
+        }
+
+        .copy-btn {
+            background: #2ecc71;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .copy-btn:hover {
+            background: #27ae60;
+        }
+
+        /* USDT Section */
+        .usdt-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 2rem;
+            background: #f8f9fa;
+        }
+
+        .usdt-method {
+            background: #e67e22;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .network-info {
+            background: #34495e;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .network-info h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .wallet-address {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 2px dashed #e67e22;
+            margin: 1rem 0;
+        }
+
+        .address-text {
+            font-family: monospace;
+            font-size: 1.1rem;
+            word-break: break-all;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .instructions {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            border-left: 4px solid #3498db;
+        }
+
+        .instructions h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .instructions ol {
+            padding-left: 1.5rem;
+        }
+
+        .instructions li {
+            margin-bottom: 0.8rem;
+            color: #34495e;
+            line-height: 1.5;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .back-btn {
+            background: #95a5a6;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            text-align: center;
+            flex: 1;
+        }
+
+        .back-btn:hover {
+            background: #7f8c8d;
+        }
+
+        .payment-done-btn {
+            background: #2ecc71;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            flex: 1;
+        }
+
+        .payment-done-btn:hover {
+            background: #27ae60;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .payment-options {
+                flex-direction: column;
+            }
+            
+            .upi-section {
+                border-right: none;
+                border-bottom: 2px solid #ecf0f1;
+            }
+            
+            .qr-code {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .deposit-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .amount-display {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e74c3c;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #fff3cd;
+            border-radius: 10px;
+            border: 2px solid #ffeaa7;
+        }
+    </style>
+</head>
+<body>
+    <div class="deposit-container">
+        <div class="deposit-header">
+            <h1>Payment Karein</h1>
+            <p>Apna payment complete karne ke liye koi bhi method select karein</p>
+            <div class="amount-display">
+                Amount: ₹500 / 60 USDT
+            </div>
+        </div>
+
+        <div class="payment-options">
+            <!-- UPI Payment Section -->
+            <div class="upi-section">
+                <div class="payment-method">
+                    <h2>🌐 UPI Payment</h2>
+                    <p>Fast & Easy Indian Payment</p>
+                </div>
+
+                <div class="qr-container">
+                    <h3>QR Code Scan Karein</h3>
+                    <img src="qr_img.png" alt="UPI QR Code" class="qr-code">
+                </div>
+
+                <div class="upi-details">
+                    <h3>UPI Details</h3>
+                    <p>Ya fir manually UPI ID use karein:</p>
+                    <div class="upi-id" id="upiId">profitearn@paytm</div>
+                    <button class="copy-btn" onclick="copyUPI()">📋 UPI ID Copy Karein</button>
+                </div>
+
+                <div class="instructions">
+                    <h3>UPI Se Kaise Pay Karein:</h3>
+                    <ol>
+                        <li>Koi bhi UPI app kholen (PhonePe, Google Pay, Paytm)</li>
+                        <li>QR Scanner open karein ya manually UPI ID enter karein</li>
+                        <li>Amount ₹500 enter karein</li>
+                        <li>Payment complete karein</li>
+                        <li>Niche "Payment Done" button dabayein</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- USDT Payment Section -->
+            <div class="usdt-section">
+                <div class="payment-method">
+                    <h2>₿ USDT Payment</h2>
+                    <p>International Crypto Payment</p>
+                </div>
+
+                <div class="network-info">
+                    <h3>🌍 Network: TRC-20</h3>
+                    <p>Only TRC-20 network use karein</p>
+                </div>
+
+                <div class="wallet-address">
+                    <h3>Hamara USDT Wallet Address:</h3>
+                    <div class="address-text" id="usdtAddress">
+                        TYsg7R4fM62j8Xq1K9pL3nBvW2cD5zE6x
+                    </div>
+                    <button class="copy-btn" onclick="copyUSDT()">📋 Address Copy Karein</button>
+                </div>
+
+                <div class="instructions">
+                    <h3>USDT Se Kaise Pay Karein:</h3>
+                    <ol>
+                        <li>Apna crypto wallet kholen (Binance, Trust Wallet, etc.)</li>
+                        <li>USDT select karein</li>
+                        <li>Withdraw/Transfer option choose karein</li>
+                        <li>Network: TRC-20 select karein</li>
+                        <li>Yeh wallet address paste karein</li>
+                        <li>Amount: 60 USDT enter karein</li>
+                        <li>Transaction confirm karein</li>
+                        <li>Niche "Payment Done" button dabayein</li>
+                    </ol>
+                </div>
+
+                <div class="instructions" style="background: #fff3cd; border-left-color: #f39c12;">
+                    <h3>⚠️ Important Notes:</h3>
+                    <ul>
+                        <li>Only TRC-20 network use karein</li>
+                        <li>Minimum amount: 60 USDT</li>
+                        <li>Wrong network par funds lose ho sakte hain</li>
+                        <li>Transaction confirm hone mein 5-10 minute lag sakte hain</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div style="padding: 2rem; text-align: center; border-top: 2px solid #ecf0f1;">
+            <div class="action-buttons">
+                <a href="index.html" class="back-btn">← Back to Home</a>
+                <button class="payment-done-btn" onclick="paymentDone()">✅ Payment Done</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyUPI() {
+            const upiId = document.getElementById('upiId').textContent;
+            navigator.clipboard.writeText(upiId).then(() => {
+                alert('UPI ID copy ho gaya: ' + upiId);
+            }).catch(err => {
+                console.error('Copy failed:', err);
+                alert('Copy karne mein error aaya, manually copy karein: ' + upiId);
+            });
+        }
+
+        function copyUSDT() {
+            const usdtAddress = document.getElementById('usdtAddress').textContent;
+            navigator.clipboard.writeText(usdtAddress).then(() => {
+                alert('USDT Address copy ho gaya: ' + usdtAddress);
+            }).catch(err => {
+                console.error('Copy failed:', err);
+                alert('Copy karne mein error aaya, manually copy karein: ' + usdtAddress);
+            });
+        }
+
+        function paymentDone() {
+            const paymentMethod = confirm('Kya aapne payment complete kar diya?\n\nOK = UPI Payment\nCancel = USDT Payment');
+            
+            if (paymentMethod) {
+                alert('Dhanyawad! Aapka UPI payment receive kar liya gaya hai. Aapka account activate ho jayega within 2 hours.');
+            } else {
+                alert('Dhanyawad! Aapka USDT payment receive kar liya gaya hai. Aapka account activate ho jayega within 24 hours (blockchain confirmation ke baad).');
+            }
+            
+            // Redirect to home page after 3 seconds
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 3000);
+        }
+
+        // Auto-select text when clicking on addresses
+        document.getElementById('upiId').addEventListener('click', function() {
+            this.style.backgroundColor = '#ffeaa7';
+            setTimeout(() => {
+                this.style.backgroundColor = 'white';
+            }, 1000);
+        });
+
+        document.getElementById('usdtAddress').addEventListener('click', function() {
+            this.style.backgroundColor = '#ffeaa7';
+            setTimeout(() => {
+                this.style.backgroundColor = 'white';
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
